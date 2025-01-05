@@ -52,16 +52,12 @@ package.json
 - **Tailwind CSS & Shadcn UI**: Styling using Tailwind CSS & Shadcn UI
 - **Next.js**: Server-side rendering and static site generation.
 
-## Available Scripts
+## Implemented Features
 
-- `npm run dev`: Starts the development server.
-- `npm run build`: Builds the application for production.
-- `npm start`: Starts the production server.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
+- **Searching**: Users can search for products using a search bar.
+- **Filtering** by Category: Products can be filtered by categories.
+- **Sorting**: Products can be sorted by different criteria (e.g., price, popularity).
+- **Carts**: Users can add products to a cart and view their cart.
+- **Product Details Page**: Detailed view of each product.
+- **Lazy Loading**: Images and components are loaded lazily for better performance.
+- **Shimmer Effect**: Modern UI with shimmer effect while loading content.
