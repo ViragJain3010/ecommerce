@@ -5,7 +5,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ## Setup
 1. Clone the GitHub repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/ViragJain3010/ecommerce
 ```
 
 2. Install the dependencies
@@ -46,6 +46,7 @@ package.json
 
 ## Key Features
 
+- **API**: Used [Dummy JSON](https://dummyjson.com/docs/products#products-category) API library for raw data
 - **Redux**: State management using Redux.
 - **Debounce**: Debouncing utility for optimizing performance.
 - **Tailwind CSS & Shadcn UI**: Styling using Tailwind CSS & Shadcn UI
