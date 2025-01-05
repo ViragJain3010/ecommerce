@@ -1,6 +1,7 @@
-// app/cart/page.js
+// // app/cart/page.js
 'use client';
 
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart, updateQuantity } from '@/store/slices/CartSlice';
 import Header from '@/components/Header';
@@ -9,14 +10,40 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Trash2 } from 'lucide-react';
 import Link from 'next/link';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 export default function Cart() {
   const dispatch = useDispatch();
   const { items, total } = useSelector(state => state.cart);
+  const [itemToDelete, setItemToDelete] = useState(null);
 
   const handleQuantityChange = (id, newQuantity) => {
     if (newQuantity < 1) return;
     dispatch(updateQuantity({ id, quantity: parseInt(newQuantity) }));
+  };
+
+  const openDeleteModal = (item) => {
+    setItemToDelete(item);
+  };
+
+  const closeDeleteModal = () => {
+    setItemToDelete(null);
+  };
+
+  const confirmDelete = () => {
+    if (itemToDelete) {
+      dispatch(removeFromCart(itemToDelete.id));
+      closeDeleteModal();
+    }
   };
 
   if (items.length === 0) {
@@ -70,7 +97,7 @@ export default function Cart() {
                   <Button
                     variant="destructive"
                     size="icon"
-                    onClick={() => dispatch(removeFromCart(item.id))}
+                    onClick={() => openDeleteModal(item)}
                   >
                     <Trash2 className="h-4 w-4" />
                   </Button>
@@ -90,6 +117,22 @@ export default function Cart() {
           </CardContent>
         </Card>
       </div>
+
+      <AlertDialog open={!!itemToDelete} onOpenChange={closeDeleteModal}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This will remove {itemToDelete?.title} from your cart.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmDelete}>Delete</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
+
